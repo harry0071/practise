@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>苹果风格轮播图</title>
+    <style type="text/css">
+        .clearfix {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        body{
+        	text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .imgs {
+            width: 3680px;
+            transition: .5s;
+        }
+
+        .imgs>li {
+            float: left;
+        }
+
+        .box {
+        	margin: 10px auto;
+            width: 920px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px #bbb;
+        }
+
+        span{
+        	background: orange;
+        	color: white;
+        	padding: 10px;
+        	line-height: 2;
+        }
+        .hover{
+        	background: #e49911;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="imgs clearfix" style="transform:translateX(0px)">
+            <li><img src="苹果风格轮播/imgs/macbook.jpg" width="920" height="400"></li>
+            <li><img src="苹果风格轮播/imgs/iphone.jpg" width="920" height="400"></li>
+            <li><img src="苹果风格轮播/imgs/imac.jpg" width="920" height="400"></li>
+            <li><img src="苹果风格轮播/imgs/info.jpg" width="920" height="400"></li>
+        </ul>
+    </div>
+    <div class="btns">
+        <span>macbook</span>
+        <span>iphone</span>
+        <span>imac</span>
+        <span>info</span>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        var n = 0;
+        var $btn = $('span');
+        $btn.click(function() {
+            $btn.removeClass();
+            $(this).addClass('hover');
+            n = $(this).index();
+            $('.imgs').css('transform', 'translateX(' + (-920 * n) + 'px)');
+        });
+
+        function setTimer() {
+            n++;
+            $btn.eq(n % 5).trigger('click');
+        }
+
+        var timer = null;
+        timer = setInterval(setTimer, 2000);
+
+
+        $('.box').hover(function() {
+            clearInterval(timer);
+        }, function() {
+            timer = setInterval(setTimer, 2000);
+        });
+    </script>
+</body>
+
+</html>
