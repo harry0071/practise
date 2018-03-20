@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>点击其他地方关闭浮层</title>
+    <style type="text/css">
+        #wrapper {
+            position: relative;
+        }
+
+        #popover {
+            padding: 20px;
+            border: 1px solid red;
+            position: absolute;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <button id="click">点我</button>
+        <div id="popover">
+            <input type="checkbox">浮层
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+    	$('#click').click(function() {
+    		$('#popover').toggle();
+    		$(document).one('click', function() {
+	    		console.log('hide');//只会执行一次，节省内存
+	    		$('#popover').hide();
+    		});
+    	});
+
+    	$('#wrapper').click(function(ev) {
+    		ev.stopPropagation();
+    	});
+    </script>
+</body>
+
+</html>
